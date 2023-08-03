@@ -31,7 +31,7 @@ After installing you could load the environement
 
 > ressources/mockoon/rental-oc.json
 
-directly inside Mockoon 
+directly inside Mockoon
 
 > File > Open environmement
 
@@ -43,9 +43,9 @@ Mockoon documentation: https://mockoon.com/docs/latest/about/
 
 For Postman import the collection
 
-> ressources/postman/rental.postman_collection.json 
+> ressources/postman/rental.postman_collection.json
 
-by following the documentation: 
+by following the documentation:
 
 https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman
 
