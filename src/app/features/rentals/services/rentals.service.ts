@@ -1,23 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Rental } from 'src/app/features/rentals/interfaces/rental.interface';
 import { RentalResponse } from '../interfaces/api/rentalResponse.interface';
 import { RentalsResponse } from '../interfaces/api/rentalsResponse.interface';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalsService {
 
-  private pathService = 'api/rentals';
+  private pathService = 'http://localhost:3001/api/rentals';
 
   constructor(private httpClient: HttpClient) { }
 
   public all(): Observable<RentalsResponse> {
-    return this.httpClient.get<RentalsResponse>(this.pathService);
+    return this.httpClient.get<RentalsResponse>(this.pathService).pipe(
+      tap(data => console.log('Data from rentalsService.all():', data))
+    );
   }
+
 
   public detail(id: string): Observable<Rental> {
     return this.httpClient.get<Rental>(`${this.pathService}/${id}`);

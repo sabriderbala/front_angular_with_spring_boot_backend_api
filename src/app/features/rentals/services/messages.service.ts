@@ -9,11 +9,12 @@ import { MessageResponse } from '../interfaces/api/messageResponse.interface';
 })
 export class MessagesService {
 
-  private pathService = 'api/messages';
+  private pathService = 'http://localhost:3001/api/messages';
 
   constructor(private httpClient: HttpClient) { }
 
   public send(messageRequest: MessageRequest): Observable<MessageResponse> {
+    console.log('Sending message:', messageRequest);
     return this.httpClient.post<MessageResponse>(this.pathService, messageRequest);
-  } 
+  }
   }
