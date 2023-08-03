@@ -11,7 +11,7 @@ import { User } from 'src/app/interfaces/user.interface';
 })
 export class AuthService {
 
-  private pathService = 'api/auth';
+  private pathService = 'http://localhost:3001/api/auth';
 
   constructor(private httpClient: HttpClient) { }
 

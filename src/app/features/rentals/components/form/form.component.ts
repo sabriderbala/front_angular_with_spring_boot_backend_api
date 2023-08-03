@@ -31,43 +31,53 @@ export class FormComponent implements OnInit {
 
   public ngOnInit(): void {
     const url = this.router.url;
+    console.log('URL:', url);
+    console.log('Initial id:', this.id);
     if (url.includes('update')) {
-      this.onUpdate = true;
-      this.id = this.route.snapshot.paramMap.get('id')!;
-      this.rentalsService
+        this.onUpdate = true;
+        this.id = this.route.snapshot.paramMap.get('id')!;
+        this.rentalsService
         .detail(this.id)
-        .subscribe((rental: Rental) => this.initForm(rental));
-    } else {
-      this.initForm();
-    }
-  }
+        .subscribe((rental: Rental) => {
+            console.log('Received rental:', rental);
+            this.initForm(rental);
+        });
 
-  public submit(): void {
+    } else {
+        this.initForm();
+    }
+    console.log('Final id:', this.id);
+}
+
+
+public submit(): void {
+    console.log('Submit function called');
     const formData = new FormData();
     formData.append('name', this.rentalForm!.get('name')?.value);
     formData.append('surface', this.rentalForm!.get('surface')?.value);
     formData.append('price', this.rentalForm!.get('price')?.value);
     if (!this.onUpdate) {
-      formData.append('picture', this.rentalForm!.get('picture')?.value._files[0]);
+        formData.append('picture', this.rentalForm!.get('picture')?.value._files[0]);
     }
     formData.append('description', this.rentalForm!.get('description')?.value);
-
+    console.log('formData:', formData);
     if (!this.onUpdate) {
       this.rentalsService
         .create(formData)
         .subscribe((rentalResponse: RentalResponse) => this.exitPage(rentalResponse));
     } else {
       this.rentalsService
-        .update(this.id!, formData)
-        .subscribe((rentalResponse: RentalResponse) => this.exitPage(rentalResponse));
+      .update(this.id!, formData)
+      .subscribe((rentalResponse: RentalResponse) => this.exitPage(rentalResponse));
     }
   }
 
   private initForm(rental?: Rental): void {
+    console.log('initForm called with', rental);
     console.log(rental);
     console.log(this.sessionService.user!.id);
     if(rental?.owner_id !== this.sessionService.user!.id) {
-      this.router.navigate(['/rentals']);
+      this.router.navigate(['/rentals/create']);
     }
     this.rentalForm = this.fb.group({
       name: [rental ? rental.name : '', [Validators.required]],
@@ -82,6 +92,6 @@ export class FormComponent implements OnInit {
 
   private exitPage(rentalResponse: RentalResponse): void {
     this.matSnackBar.open(rentalResponse.message, "Close", { duration: 3000 });
-    this.router.navigate(['rentals']);
+    this.router.navigate(['/rentals']);
   }
 }

@@ -17,6 +17,7 @@ export class MeComponent implements OnInit {
     this.authService.me().subscribe(
       (user: User) => this.user = user
     )
+    console.log('User:',  this.authService.me())
   }
 
   public back() {

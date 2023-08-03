@@ -8,6 +8,7 @@ import { MessageRequest } from '../../interfaces/api/messageRequest.interface';
 import { MessageResponse } from '../../interfaces/api/messageResponse.interface';
 import { MessagesService } from '../../services/messages.service';
 import { RentalsService } from '../../services/rentals.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detail',
@@ -20,6 +21,7 @@ export class DetailComponent implements OnInit {
   public rental: Rental | undefined;
 
   constructor(
+    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private messagesService: MessagesService,
@@ -47,6 +49,7 @@ export class DetailComponent implements OnInit {
       user_id: this.sessionService.user?.id,
       message: this.messageForm.value.message
     } as MessageRequest;
+    console.log('rental_id', this.rental!.id);
 
     this.messagesService.send(message).subscribe(
       (messageResponse: MessageResponse) => {
@@ -59,6 +62,11 @@ export class DetailComponent implements OnInit {
     this.messageForm = this.fb.group({
       message: ['', [Validators.required, Validators.min(10)]],
     });
+  }
+
+  getPictureUrl(picture: string): SafeUrl {
+    const base64Image = 'data:image/jpeg;base64,' + picture;
+    return this.sanitizer.bypassSecurityTrustUrl(base64Image);
   }
 
 }
