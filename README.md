@@ -1,8 +1,8 @@
-# Estate
+# Rental App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
-## Start the project
+### Start the project
 
 Git clone:
 
@@ -10,9 +10,9 @@ Git clone:
 
 Go inside folder:
 
-> cd P3-Full-Stack-portail-locataire
+> cd front_angular_connected_to_spring_boot_api
 
-Install dependencies:
+### Install dependencies:
 
 > npm install
 
@@ -20,36 +20,43 @@ Launch Front-end:
 
 > npm run start;
 
+Launch Back-end
 
-## Ressources
+> right click on Api-Backend-Chatop > Run As > Spring Boot App
 
-### Mockoon env
+### SWAGGER DOCUMENTATION
 
-Download Mockoon here: https://mockoon.com/download/
+> To access the Swagger Documentation, go to http://localhost:3001/login.
 
-After installing you could load the environement
+> Sign in with your credentials.
 
-> ressources/mockoon/rental-oc.json
+To make a request via Swagger, a Bearer Token is required. You will first need to obtain this token using Postman.
 
-directly inside Mockoon
+### Obtain the Bearer Token with Postman
 
-> File > Open environmement
+> Open Postman.
 
-For launching the Mockoon server click on play bouton
+> Create a new request and set the HTTP method to POST.
 
-Mockoon documentation: https://mockoon.com/docs/latest/about/
+> In the URL field, enter http://localhost:3001/api/auth/login.
 
-### Postman collection
+> Navigate to the Body tab, select raw, and choose JSON (application/json) from the dropdown menu.
 
-For Postman import the collection
+> In the text area that appears, enter your JSON payload, for example:
 
-> ressources/postman/rental.postman_collection.json
+{
+  "email": "your.email@example.com",
+  "password": "yourPassword"
+}
 
-by following the documentation:
+> Click on the Send button to send the request.
 
-https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman
+> Copy the Bearer Token from the response you receive.
 
+> Return to the Swagger documentation.
 
-### MySQL
+> Use the option to add the Bearer Token (often this is done by clicking an Authorize button or similar).
 
-SQL script for creating the schema is available `ressources/sql/script.sql`
+> Paste in the Bearer Token and validate.
+
+You are now authorized to make secure requests via Swagger.
