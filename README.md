@@ -24,6 +24,11 @@ Launch Back-end
 
 > right click on Api-Backend-Chatop > Run As > Spring Boot App
 
+RentalApp URL ( you need to register ) :
+
+> "http://localhost:4200/"
+> refresh page for login
+
 ### SWAGGER DOCUMENTATION
 
 > To access the Swagger Documentation, go to http://localhost:3001/login.
