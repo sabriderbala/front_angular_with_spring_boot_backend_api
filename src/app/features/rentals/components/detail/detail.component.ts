@@ -49,7 +49,6 @@ export class DetailComponent implements OnInit {
       user_id: this.sessionService.user?.id,
       message: this.messageForm.value.message
     } as MessageRequest;
-    console.log('rental_id', this.rental!.id);
 
     this.messagesService.send(message).subscribe(
       (messageResponse: MessageResponse) => {

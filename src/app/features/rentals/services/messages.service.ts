@@ -14,7 +14,6 @@ export class MessagesService {
   constructor(private httpClient: HttpClient) { }
 
   public send(messageRequest: MessageRequest): Observable<MessageResponse> {
-    console.log('Sending message:', messageRequest);
     return this.httpClient.post<MessageResponse>(this.pathService, messageRequest);
   }
   }

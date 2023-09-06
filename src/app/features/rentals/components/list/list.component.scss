@@ -5,3 +5,16 @@
         gap: 2rem;
     }
 }
+
+.mat-card-image {
+  width: calc(400px + 32px);
+  max-height: 300px;
+}
+
+.items {
+  flex-wrap: wrap;
+}
+
+.mat-card .item {
+  width: 400px;
+}
